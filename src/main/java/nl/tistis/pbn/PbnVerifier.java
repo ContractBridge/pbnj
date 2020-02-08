@@ -61,7 +61,7 @@ public class PbnVerifier extends Frame
 
     private String mDirectory;
 
-    private String PbnVersions[] = {" PBN 2.1 ", " PBN 2.0 ", " PBN 1.0 "};
+    private String[] PbnVersions = {" PBN 2.1 ", " PBN 2.0 ", " PBN 1.0 "};
 
 
     public PbnVerifier(
@@ -142,6 +142,17 @@ public class PbnVerifier extends Frame
         }
         setLocation(100, 100);
         setSize(500, 150);
+    }
+
+    public static void main(
+            String[] args) {
+        Frame lVerifier;
+
+        lVerifier = new PbnVerifier(args, false);
+        if ((args == null)
+                || (args.length == 0)) {
+            lVerifier.show();
+        }
     }
 
     public void add(
@@ -539,17 +550,6 @@ public class PbnVerifier extends Frame
                     , bVerbose
                     , lPBN10
                     , false);
-        }
-    }
-
-    public static void main(
-            String[] args) {
-        Frame lVerifier;
-
-        lVerifier = new PbnVerifier(args, false);
-        if ((args == null)
-                || (args.length == 0)) {
-            lVerifier.show();
         }
     }
 }

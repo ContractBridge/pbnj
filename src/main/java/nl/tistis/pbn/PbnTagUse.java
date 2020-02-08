@@ -1,4 +1,6 @@
-package nl.tistis.pbn;/*
+package nl.tistis.pbn;
+
+/*
  * File   :     PbnTagUse.java
  * Author :     Tis Veugen
  * Date   :     1999-08-13
@@ -8,11 +10,10 @@ package nl.tistis.pbn;/*
  * -------
  */
 
-public class PbnTagUse
-{
-  public static final int       NONE = 0;
-  public static final int       USED = 1;
-  public static final int       PREV = 2;   // Same as previous due to '#'
-  public static final int       HSHS = 3;   // Tag starting with "##"
-  public static final int       COPY = 4;   // Same as previous due to '##'
+public class PbnTagUse {
+    public static final int NONE = 0;
+    public static final int USED = 1;
+    public static final int PREV = 2;   // Same as previous due to '#'
+    public static final int HSHS = 3;   // Tag starting with "##"
+    public static final int COPY = 4;   // Same as previous due to '##'
 }

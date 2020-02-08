@@ -1,4 +1,6 @@
-package nl.tistis.pbn;/*
+package nl.tistis.pbn;
+
+/*
  * File   :     PbnUseTagIds.java
  * Author :     Tis Veugen
  * Date   :     1999-08-10
@@ -9,78 +11,66 @@ package nl.tistis.pbn;/*
  * 1999-08-10 Store game nrs.
  */
 
-public class PbnUseTagIds
-{
-  private int []                maGameNrs;
-  private int                   mGameNr = -1;
-  private int                   mTagId  = -1;
+public class PbnUseTagIds {
+    private int[] maGameNrs;
+    private int mGameNr = -1;
+    private int mTagId = -1;
 
-  public                        PbnUseTagIds()
-  {
-    maGameNrs = new int[ PbnTagId.NUMBER_TOTAL ];
+    public PbnUseTagIds() {
+        maGameNrs = new int[PbnTagId.NUMBER_TOTAL];
 
-    for ( int iTag = 0; iTag < PbnTagId.NUMBER_TOTAL; iTag++ )
-    {
-      maGameNrs[ iTag ] = -1;
-    }
-  }
-
-  public void                   SetGameNr(
-  int                           iTag,
-  int                           iGameNr )
-  {
-    maGameNrs[ iTag ] = iGameNr;
-  }
-
-  public void                   Reset()
-  {
-    mGameNr = -1;
-  }
-
-  /*
-   * Compute the smallest game number, bigger than mGameNr.
-   */
-  public int                    GetGameNr()
-  {
-    int                         lGameNr = -1;
-    int                         iGameNr;
-
-    for ( int iTag = 0; iTag < PbnTagId.NUMBER_TOTAL; iTag++ )
-    {
-      iGameNr = maGameNrs[ iTag ];
-      if ( iGameNr > mGameNr )
-      {
-        if ( ( lGameNr < 0       )
-          || ( iGameNr < lGameNr ) )
-        {
-          lGameNr = iGameNr;
+        for (int iTag = 0; iTag < PbnTagId.NUMBER_TOTAL; iTag++) {
+            maGameNrs[iTag] = -1;
         }
-      }
     }
 
-    mGameNr = lGameNr;
-    mTagId  = 0;
+    public void SetGameNr(
+            int iTag,
+            int iGameNr) {
+        maGameNrs[iTag] = iGameNr;
+    }
 
-    return mGameNr;
-  }
-
-  /*
-   * Compute the next TagId with reference to game mGameNr.
-   */
-  public int                    GetTagId()
-  {
-    for ( int iTag = mTagId; iTag < PbnTagId.NUMBER_TOTAL; iTag++ )
-    {
-      if ( maGameNrs[ iTag ] == mGameNr )
-      {
-        mTagId = iTag + 1;
-        return iTag;
-      }
+    public void Reset() {
+        mGameNr = -1;
     }
 
     /*
-     * No tag found.
+     * Compute the smallest game number, bigger than mGameNr.
      */
-    return -1;
-  }
+    public int GetGameNr() {
+        int lGameNr = -1;
+        int iGameNr;
+
+        for (int iTag = 0; iTag < PbnTagId.NUMBER_TOTAL; iTag++) {
+            iGameNr = maGameNrs[iTag];
+            if (iGameNr > mGameNr) {
+                if ((lGameNr < 0)
+                        || (iGameNr < lGameNr)) {
+                    lGameNr = iGameNr;
+                }
+            }
+        }
+
+        mGameNr = lGameNr;
+        mTagId = 0;
+
+        return mGameNr;
+    }
+
+    /*
+     * Compute the next TagId with reference to game mGameNr.
+     */
+    public int GetTagId() {
+        for (int iTag = mTagId; iTag < PbnTagId.NUMBER_TOTAL; iTag++) {
+            if (maGameNrs[iTag] == mGameNr) {
+                mTagId = iTag + 1;
+                return iTag;
+            }
+        }
+
+        /*
+         * No tag found.
+         */
+        return -1;
+    }
 }
