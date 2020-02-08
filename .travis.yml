@@ -1,6 +1,8 @@
+# We will use Ubuntu 18.04 (bionic beaver). List of options:
+# https://docs.travis-ci.com/user/reference/overview/#linux
+dist: xenial
+
+language: java
+
 jdk:
-  - oraclejdk8
-  - oraclejdk9
   - oraclejdk11
-  - openjdk8
-  - openjdk-ea
