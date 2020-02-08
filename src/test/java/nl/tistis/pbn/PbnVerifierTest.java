@@ -8,4 +8,9 @@ public class PbnVerifierTest {
         App classUnderTest = new App();
         assertNotNull(classUnderTest.getGreeting(), "app should have a greeting");
     }
+
+    @Test void main() {
+        PbnVerifier sut = new PbnVerifier(null, true);
+        assertNotNull(sut, "PbnVerifier.main()");
+    }
 }
