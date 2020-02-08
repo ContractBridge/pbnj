@@ -1,4 +1,6 @@
-package nl.tistis.pbn;/*
+package nl.tistis.pbn;
+
+/*
  * File   :     PbnGen
  * Author :     Tis Veugen
  * Date   :     2007-06-24
@@ -12,72 +14,62 @@ package nl.tistis.pbn;/*
  * 2007-06-24 Added VERSION_21
  */
 
-public class PbnGen
-{
-  public static final int       VERSION_10 = 0;
-  public static final int       VERSION_20 = 1;
-  public static final int       VERSION_21 = 2;
-  
-  public static final int       SECTION_IDENT   = 0;
-  public static final int       SECTION_AUCTION = 1;
-  public static final int       SECTION_PLAY    = 2;
-  public static final int       SECTION_SUPPL   = 3;
+public class PbnGen {
+    public static final int VERSION_10 = 0;
+    public static final int VERSION_20 = 1;
+    public static final int VERSION_21 = 2;
 
-  public static final int       PARSE_FIRST = 0;
-  public static final int       PARSE_NEXT  = 1;
-  public static final int       PARSE_COPY  = 2;
+    public static final int SECTION_IDENT = 0;
+    public static final int SECTION_AUCTION = 1;
+    public static final int SECTION_PLAY = 2;
+    public static final int SECTION_SUPPL = 3;
 
-  public static int             mVersion = VERSION_21;
+    public static final int PARSE_FIRST = 0;
+    public static final int PARSE_NEXT = 1;
+    public static final int PARSE_COPY = 2;
 
-  public static int             mParsing = PARSE_FIRST;
-  public static boolean         mbVerify = false;
-  public static int             mVerbose = 0;
+    public static int mVersion = VERSION_21;
 
-  public static void            SetVerify()
-  {
-    mbVerify = true;
-  }
+    public static int mParsing = PARSE_FIRST;
+    public static boolean mbVerify = false;
+    public static int mVerbose = 0;
 
-  public static void            SetNoVerify()
-  {
-    mbVerify = false;
-  }
+    public static void SetVerify() {
+        mbVerify = true;
+    }
 
-  public static boolean         IsVerify()
-  {
-    return mbVerify;
-  }
+    public static void SetNoVerify() {
+        mbVerify = false;
+    }
 
-  public static int             GetParsing()
-  {
-    return mParsing;
-  }
+    public static boolean IsVerify() {
+        return mbVerify;
+    }
 
-  public static void            SetParsing(
-  int                           iParsing )
-  {
-    mParsing = iParsing;
-  }
+    public static int GetParsing() {
+        return mParsing;
+    }
 
-  public static int             GetVerbose()
-  {
-    return mVerbose;
-  }
+    public static void SetParsing(
+            int iParsing) {
+        mParsing = iParsing;
+    }
 
-  public static void            SetVerbose(
-  int                           iVerbose )
-  {
-    mVerbose = iVerbose;
-  }
+    public static int GetVerbose() {
+        return mVerbose;
+    }
 
-  public static int             GetVersion()
-  {
-    return mVersion;
-  }
+    public static void SetVerbose(
+            int iVerbose) {
+        mVerbose = iVerbose;
+    }
 
-  public static void            SetVersion(
-  int                           iVersion )
-  {
-    mVersion = iVersion;
-  }
+    public static int GetVersion() {
+        return mVersion;
+    }
+
+    public static void SetVersion(
+            int iVersion) {
+        mVersion = iVersion;
+    }
 }

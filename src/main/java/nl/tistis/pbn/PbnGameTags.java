@@ -1,4 +1,6 @@
-package nl.tistis.pbn;/*
+package nl.tistis.pbn;
+
+/*
  * File   :     PbnGameTags.java
  * Author :     Tis Veugen
  * Date   :     2012-04-28
@@ -19,364 +21,313 @@ package nl.tistis.pbn;/*
 
 import java.lang.reflect.Array;
 
-public class PbnGameTags
-{
-  String []                     maTagValues;
-  int []                        maUsedTags;
+public class PbnGameTags {
+    public boolean[] mabHiddenSide;
+    String[] maTagValues;
+    int[] maUsedTags;
+    private PbnMoveNote[] maCallNote;
+    private PbnMoveNote[] maCardNote;
+    private PbnComment mGameComment;
+    private PbnComment[] maTagComments;
+    private PbnComment[] maCallNoteComments;
+    private PbnComment[] maCardNoteComments;
+    private PbnMoveAnno[] maCallAnno;
+    private PbnMoveAnno[][] maaCardAnno;
+    private PbnTable mActionTable;
+    private PbnTable mAuctionTimeTable;
+    private PbnTable mInstantScoreTable;
+    private PbnTable mPlayTimeTable;
+    private PbnTable mScoreTable;
+    private PbnTable mTotalScoreTable;
+    private PbnTable mOptimumPlayTable;
+    private PbnTable mOptimumResultTable;
 
-  private PbnMoveNote []        maCallNote;
-  private PbnMoveNote []        maCardNote;
+    public PbnGameTags() {
+        maTagValues = new String[PbnTagId.NUMBER_TOTAL];
+        maUsedTags = new int[PbnTagId.NUMBER_TOTAL];
 
-  private PbnComment mGameComment;
-  private PbnComment[]         maTagComments;
-  private PbnComment[]         maCallNoteComments;
-  private PbnComment[]         maCardNoteComments;
+        maCallNote = new PbnMoveNote[PbnNote.NUMBER];
+        maCardNote = new PbnMoveNote[PbnNote.NUMBER];
 
-  private PbnMoveAnno []        maCallAnno;
-  private PbnMoveAnno [][]      maaCardAnno;
+        mabHiddenSide = new boolean[PbnSide.NUMBER];
 
-  private PbnTable              mActionTable;
-  private PbnTable              mAuctionTimeTable;
-  private PbnTable              mInstantScoreTable;
-  private PbnTable              mPlayTimeTable;
-  private PbnTable              mScoreTable;
-  private PbnTable              mTotalScoreTable;
-  private PbnTable              mOptimumPlayTable;
-  private PbnTable              mOptimumResultTable;
+        mGameComment = new PbnComment();
+        maTagComments = new PbnComment[PbnTagId.NUMBER_TOTAL];
+        maCallNoteComments = new PbnComment[PbnNote.NUMBER];
+        maCardNoteComments = new PbnComment[PbnNote.NUMBER];
 
-  public boolean []             mabHiddenSide;
+        maCallAnno = new PbnMoveAnno[0];
+        maaCardAnno = new PbnMoveAnno[PbnTrick.NUMBER + 1][PbnSide.NUMBER];
 
-  public                        PbnGameTags()
-  {
-    maTagValues = new String[ PbnTagId.NUMBER_TOTAL ];
-    maUsedTags = new int[ PbnTagId.NUMBER_TOTAL ];
+        mActionTable = new PbnTable();
+        mAuctionTimeTable = new PbnTable();
+        mInstantScoreTable = new PbnTable();
+        mPlayTimeTable = new PbnTable();
+        mScoreTable = new PbnTable();
+        mTotalScoreTable = new PbnTable();
+        mOptimumPlayTable = new PbnTable();
+        mOptimumResultTable = new PbnTable();
 
-    maCallNote  = new PbnMoveNote[ PbnNote.NUMBER ];
-    maCardNote  = new PbnMoveNote[ PbnNote.NUMBER ];
+        for (int iNote = 0; iNote < PbnNote.NUMBER; iNote++) {
+            maCallNote[iNote] = new PbnMoveNote();
+            maCardNote[iNote] = new PbnMoveNote();
 
-    mabHiddenSide = new boolean[ PbnSide.NUMBER ];
+            maCallNoteComments[iNote] = new PbnComment();
+            maCardNoteComments[iNote] = new PbnComment();
+        }
 
-    mGameComment = new PbnComment();
-    maTagComments = new PbnComment[ PbnTagId.NUMBER_TOTAL ];
-    maCallNoteComments = new PbnComment[ PbnNote.NUMBER ];
-    maCardNoteComments = new PbnComment[ PbnNote.NUMBER ];
+        for (int iTag = 0; iTag < PbnTagId.NUMBER_TOTAL; iTag++) {
+            maUsedTags[iTag] = PbnTagUse.NONE;
+            maTagComments[iTag] = new PbnComment();
+        }
 
-    maCallAnno  = new PbnMoveAnno[ 0 ];
-    maaCardAnno = new PbnMoveAnno[ PbnTrick.NUMBER+1 ][ PbnSide.NUMBER ];
+        for (int iSide = 0; iSide < PbnSide.NUMBER; iSide++) {
+            mabHiddenSide[iSide] = false;
 
-    mActionTable        = new PbnTable();
-    mAuctionTimeTable   = new PbnTable();
-    mInstantScoreTable  = new PbnTable();
-    mPlayTimeTable      = new PbnTable();
-    mScoreTable         = new PbnTable();
-    mTotalScoreTable    = new PbnTable();
-    mOptimumPlayTable   = new PbnTable();
-    mOptimumResultTable = new PbnTable();
-
-    for ( int iNote = 0; iNote < PbnNote.NUMBER; iNote++ )
-    {
-      maCallNote[ iNote ] = new PbnMoveNote();
-      maCardNote[ iNote ] = new PbnMoveNote();
-
-      maCallNoteComments[ iNote ] = new PbnComment();
-      maCardNoteComments[ iNote ] = new PbnComment();
+            for (int iTrick = 0; iTrick < PbnTrick.NUMBER + 1; iTrick++) {
+                maaCardAnno[iTrick][iSide] = new PbnMoveAnno();
+            }
+        }
     }
 
-    for ( int iTag = 0; iTag < PbnTagId.NUMBER_TOTAL; iTag++ )
-    {
-      maUsedTags[ iTag ] = PbnTagUse.NONE;
-      maTagComments[ iTag ] = new PbnComment();
+    public boolean TagIdExist(
+            PbnTagId oTagId) {
+        switch (maUsedTags[oTagId.Get()]) {
+            case PbnTagUse.NONE:
+            case PbnTagUse.COPY:
+                return false;
+            default:
+                break;
+        }
+
+        return true;
     }
 
-    for ( int iSide = 0; iSide < PbnSide.NUMBER; iSide++ )
-    {
-      mabHiddenSide[ iSide ] = false;
-
-      for ( int iTrick = 0; iTrick < PbnTrick.NUMBER+1; iTrick++ )
-      {
-        maaCardAnno[ iTrick][ iSide ] = new PbnMoveAnno();
-      }
-    }
-  }
-
-  public boolean                TagIdExist(
-  PbnTagId                      oTagId )
-  {
-    switch ( maUsedTags[ oTagId.Get() ] )
-    {
-    case PbnTagUse.NONE:
-    case PbnTagUse.COPY:
-      return false;
-    default:
-      break;
+    public String GetTagValue(
+            PbnTagId oTagId) {
+        return maTagValues[oTagId.Get()];
     }
 
-    return true;
-  }
-
-  public String                 GetTagValue(
-  PbnTagId                      oTagId )
-  {
-    return maTagValues[ oTagId.Get() ];
-  }
-
-  public String                 GetTagString(
-  PbnTagId                      oTagId )
-  {
-    return PbnChar.FilterBackslash( GetTagValue( oTagId ) );
-  }
-
-  public void                   SetTagValue(
-  PbnTagId                      oTagId,
-  String                        oString )
-  {
-    SetTagValue( oTagId, PbnTagUse.USED, oString );
-  }
-
-  public void                   SetTagValue(
-  PbnTagId                      oTagId,
-  int                           iTagType,
-  String                        oString )
-  {
-    int                         index = oTagId.Get();
-
-    maTagValues[ index ] = oString;  //.clone();
-    maUsedTags[ index ] = iTagType;
-  }
-
-  public int                    GetTagUse(
-  PbnTagId                      oTagId )
-  {
-    return maUsedTags[ oTagId.Get() ];
-  }
-
-  public void                   SetTagUse(
-  PbnTagId                      oTagId,
-  int                           iTagType )
-  {
-    maUsedTags[ oTagId.Get() ] = iTagType;
-  }
-
-  public boolean                UsedTagValue(
-  PbnTagId                      oTagId )
-  {
-    return UsedTagValue( oTagId.Get() );
-  }
-
-  public boolean                UsedTagValue(
-  int                           iTag )
-  {
-    return (maUsedTags[ iTag ] != PbnTagUse.NONE);
-  }
-
-  public void                   CopyTags(
-  PbnGameTags oGameTags )
-  {
-    for ( int iTag = 0; iTag < PbnTagId.NUMBER_TOTAL; iTag++ )
-    {
-      maUsedTags[ iTag ] = oGameTags.maUsedTags[ iTag ];
-      if ( UsedTagValue( iTag ) )
-      {
-        maTagValues[ iTag ] = new String( oGameTags.maTagValues[ iTag ] );
-      }
+    public String GetTagString(
+            PbnTagId oTagId) {
+        return PbnChar.FilterBackslash(GetTagValue(oTagId));
     }
-  }
 
-  public void                   IncCallAnno()
-  {
-    maCallAnno = (PbnMoveAnno []) PbnU.ArrayInc( maCallAnno );
-
-    maCallAnno[ Array.getLength(maCallAnno)-1 ] = new PbnMoveAnno();
-  }
-
-  public PbnMoveAnno            GetCallAnno(
-  int                           ixCall )
-  {
-    return maCallAnno[ ixCall ];
-  }
-
-  public PbnMoveAnno            GetCardAnno(
-  int                           ixTrick,
-  PbnSide                       oSide )
-  {
-    return maaCardAnno[ ixTrick ][ oSide.Get() ];
-  }
-
-  public PbnMoveNote            GetCallNote(
-  int                           iNote )
-  {
-    return maCallNote[ iNote-1 ];
-  }
-
-  public PbnMoveNote            GetCardNote(
-  int                           iNote )
-  {
-    return maCardNote[ iNote-1 ];
-  }
-
-  public PbnComment GetGameComment()
-  {
-    return mGameComment;
-  }
-
-  public PbnComment GetTagComment(
-  PbnTagId                      oTagId )
-  {
-    return maTagComments[ oTagId.Get() ];
-  }
-
-  public PbnComment GetCallNoteComment(
-  int                           iNote )
-  {
-    return maCallNoteComments[ iNote-1 ];
-  }
-
-  public PbnComment GetCardNoteComment(
-  int                           iNote )
-  {
-    return maCardNoteComments[ iNote-1 ];
-  }
-
-  public void                   SetHiddenSide(
-  PbnSide                       oSide,
-  boolean                       bHidden )
-  {
-    mabHiddenSide[ oSide.Get() ] = bHidden;
-  }
-
-  public void                   PutComment(
-  String                        oString,
-  int                           iSection,
-  int                           iType,
-  int                           iTagIndex,
-  int                           iNrCalls,
-  int                           iNrTricks,
-  PbnSide                       oPlaySide )
-  {
-    switch ( iSection )
-    {
-    case PbnGen.SECTION_IDENT:
-      switch ( iType )
-      {
-      case PbnCommentAdmin.TYPE_IDENT:
-        mGameComment.Put( oString );
-        break;
-      case PbnCommentAdmin.TYPE_TAG:
-        maTagComments[ iTagIndex ].Put( oString );
-        break;
-      }
-      break;
-
-    case PbnGen.SECTION_AUCTION:
-      switch ( iType )
-      {
-      case PbnCommentAdmin.TYPE_TAG:
-        maTagComments[ iTagIndex ].Put( oString );
-        break;
-      case PbnCommentAdmin.TYPE_NOTE_TAG:
-        maCallNoteComments[ iTagIndex ].Put( oString );
-        break;
-      default:
-        maCallAnno[ iNrCalls ].PutComment( oString, iType );
-        break;
-      }
-      break;
-
-    case PbnGen.SECTION_PLAY:
-      switch ( iType )
-      {
-      case PbnCommentAdmin.TYPE_TAG:
-        maTagComments[ iTagIndex ].Put( oString );
-        break;
-      case PbnCommentAdmin.TYPE_NOTE_TAG:
-        maCardNoteComments[ iTagIndex ].Put( oString );
-        break;
-      default:
-        maaCardAnno[iNrTricks][oPlaySide.Get()].PutComment( oString, iType );
-        break;
-      }
-      break;
+    public void SetTagValue(
+            PbnTagId oTagId,
+            String oString) {
+        SetTagValue(oTagId, PbnTagUse.USED, oString);
     }
-  }
 
-  public PbnTable               GetInstantScoreTable()
-  {
-    return mInstantScoreTable;
-  }
+    public void SetTagValue(
+            PbnTagId oTagId,
+            int iTagType,
+            String oString) {
+        int index = oTagId.Get();
 
-  public PbnTable               GetActionTable()
-  {
-    return mActionTable;
-  }
-
-  public PbnTable               GetScoreTable()
-  {
-    return mScoreTable;
-  }
-
-  public PbnTable               GetTotalScoreTable()
-  {
-    return mTotalScoreTable;
-  }
-
-  public PbnTable               GetOptimumPlayTable()
-  {
-    return mOptimumPlayTable;
-  }
-
-  public PbnTable               GetOptimumResultTable()
-  {
-    return mOptimumResultTable;
-  }
-
-  public PbnTable               GetTable(
-  PbnTagId                      oTagId )
-  {
-    switch ( oTagId.Get() )
-    {
-    case PbnTagId.ACTIONTABLE:
-      return mActionTable;
-
-    case PbnTagId.AUCTIONTIMETABLE:
-      return mAuctionTimeTable;
-
-    case PbnTagId.INSTANTSCORETABLE:
-      return mInstantScoreTable;
-
-    case PbnTagId.PLAYTIMETABLE:
-      return mPlayTimeTable;
-
-    case PbnTagId.SCORETABLE:
-      return mScoreTable;
-
-    case PbnTagId.TOTALSCORETABLE:
-      return mTotalScoreTable;
-
-    case PbnTagId.OPTIMUMPLAYTABLE:
-      return mOptimumPlayTable;
-
-    case PbnTagId.OPTIMUMRESULTTABLE:
-      return mOptimumResultTable;
-
-    default:
-      return null;
+        maTagValues[index] = oString;  //.clone();
+        maUsedTags[index] = iTagType;
     }
-  }
 
-  public void                   InheritCopy(
-  PbnGameTags oGameTags,
-  PbnTagId                      oTagId )
-  {
-    int                         iTag = oTagId.Get();
+    public int GetTagUse(
+            PbnTagId oTagId) {
+        return maUsedTags[oTagId.Get()];
+    }
 
-    maUsedTags[ iTag ] = PbnTagUse.COPY;
-    if ( oGameTags.UsedTagValue( iTag ) )
-    {
-      maTagValues[ iTag ] = new String( oGameTags.maTagValues[ iTag ] );
+    public void SetTagUse(
+            PbnTagId oTagId,
+            int iTagType) {
+        maUsedTags[oTagId.Get()] = iTagType;
     }
-    else
-    {
-      maTagValues[ iTag ] = "";
+
+    public boolean UsedTagValue(
+            PbnTagId oTagId) {
+        return UsedTagValue(oTagId.Get());
     }
-  }
+
+    public boolean UsedTagValue(
+            int iTag) {
+        return (maUsedTags[iTag] != PbnTagUse.NONE);
+    }
+
+    public void CopyTags(
+            PbnGameTags oGameTags) {
+        for (int iTag = 0; iTag < PbnTagId.NUMBER_TOTAL; iTag++) {
+            maUsedTags[iTag] = oGameTags.maUsedTags[iTag];
+            if (UsedTagValue(iTag)) {
+                maTagValues[iTag] = oGameTags.maTagValues[iTag];
+            }
+        }
+    }
+
+    public void IncCallAnno() {
+        maCallAnno = (PbnMoveAnno[]) PbnU.ArrayInc(maCallAnno);
+
+        maCallAnno[Array.getLength(maCallAnno) - 1] = new PbnMoveAnno();
+    }
+
+    public PbnMoveAnno GetCallAnno(
+            int ixCall) {
+        return maCallAnno[ixCall];
+    }
+
+    public PbnMoveAnno GetCardAnno(
+            int ixTrick,
+            PbnSide oSide) {
+        return maaCardAnno[ixTrick][oSide.Get()];
+    }
+
+    public PbnMoveNote GetCallNote(
+            int iNote) {
+        return maCallNote[iNote - 1];
+    }
+
+    public PbnMoveNote GetCardNote(
+            int iNote) {
+        return maCardNote[iNote - 1];
+    }
+
+    public PbnComment GetGameComment() {
+        return mGameComment;
+    }
+
+    public PbnComment GetTagComment(
+            PbnTagId oTagId) {
+        return maTagComments[oTagId.Get()];
+    }
+
+    public PbnComment GetCallNoteComment(
+            int iNote) {
+        return maCallNoteComments[iNote - 1];
+    }
+
+    public PbnComment GetCardNoteComment(
+            int iNote) {
+        return maCardNoteComments[iNote - 1];
+    }
+
+    public void SetHiddenSide(
+            PbnSide oSide,
+            boolean bHidden) {
+        mabHiddenSide[oSide.Get()] = bHidden;
+    }
+
+    public void PutComment(
+            String oString,
+            int iSection,
+            int iType,
+            int iTagIndex,
+            int iNrCalls,
+            int iNrTricks,
+            PbnSide oPlaySide) {
+        switch (iSection) {
+            case PbnGen.SECTION_IDENT:
+                switch (iType) {
+                    case PbnCommentAdmin.TYPE_IDENT:
+                        mGameComment.Put(oString);
+                        break;
+                    case PbnCommentAdmin.TYPE_TAG:
+                        maTagComments[iTagIndex].Put(oString);
+                        break;
+                }
+                break;
+
+            case PbnGen.SECTION_AUCTION:
+                switch (iType) {
+                    case PbnCommentAdmin.TYPE_TAG:
+                        maTagComments[iTagIndex].Put(oString);
+                        break;
+                    case PbnCommentAdmin.TYPE_NOTE_TAG:
+                        maCallNoteComments[iTagIndex].Put(oString);
+                        break;
+                    default:
+                        maCallAnno[iNrCalls].PutComment(oString, iType);
+                        break;
+                }
+                break;
+
+            case PbnGen.SECTION_PLAY:
+                switch (iType) {
+                    case PbnCommentAdmin.TYPE_TAG:
+                        maTagComments[iTagIndex].Put(oString);
+                        break;
+                    case PbnCommentAdmin.TYPE_NOTE_TAG:
+                        maCardNoteComments[iTagIndex].Put(oString);
+                        break;
+                    default:
+                        maaCardAnno[iNrTricks][oPlaySide.Get()].PutComment(oString, iType);
+                        break;
+                }
+                break;
+        }
+    }
+
+    public PbnTable GetInstantScoreTable() {
+        return mInstantScoreTable;
+    }
+
+    public PbnTable GetActionTable() {
+        return mActionTable;
+    }
+
+    public PbnTable GetScoreTable() {
+        return mScoreTable;
+    }
+
+    public PbnTable GetTotalScoreTable() {
+        return mTotalScoreTable;
+    }
+
+    public PbnTable GetOptimumPlayTable() {
+        return mOptimumPlayTable;
+    }
+
+    public PbnTable GetOptimumResultTable() {
+        return mOptimumResultTable;
+    }
+
+    public PbnTable GetTable(
+            PbnTagId oTagId) {
+        switch (oTagId.Get()) {
+            case PbnTagId.ACTIONTABLE:
+                return mActionTable;
+
+            case PbnTagId.AUCTIONTIMETABLE:
+                return mAuctionTimeTable;
+
+            case PbnTagId.INSTANTSCORETABLE:
+                return mInstantScoreTable;
+
+            case PbnTagId.PLAYTIMETABLE:
+                return mPlayTimeTable;
+
+            case PbnTagId.SCORETABLE:
+                return mScoreTable;
+
+            case PbnTagId.TOTALSCORETABLE:
+                return mTotalScoreTable;
+
+            case PbnTagId.OPTIMUMPLAYTABLE:
+                return mOptimumPlayTable;
+
+            case PbnTagId.OPTIMUMRESULTTABLE:
+                return mOptimumResultTable;
+
+            default:
+                return null;
+        }
+    }
+
+    public void InheritCopy(
+            PbnGameTags oGameTags,
+            PbnTagId oTagId) {
+        int iTag = oTagId.Get();
+
+        maUsedTags[iTag] = PbnTagUse.COPY;
+        if (oGameTags.UsedTagValue(iTag)) {
+            maTagValues[iTag] = oGameTags.maTagValues[iTag];
+        } else {
+            maTagValues[iTag] = "";
+        }
+    }
 }

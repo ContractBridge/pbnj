@@ -1,4 +1,6 @@
-package nl.tistis.pbn;/*
+package nl.tistis.pbn;
+
+/*
  * File   :     PbnSuffix.java
  * Author :     Tis Veugen
  * Date   :     1999-01-03
@@ -9,65 +11,56 @@ package nl.tistis.pbn;/*
  * 1999-01-03 Added Get().
  */
 
-public class PbnSuffix
-{
-  public static final int       NONE         = 0;
-  public static final int       GOOD         = 1;
-  public static final int       POOR         = 2;
-  public static final int       VERY_GOOD    = 3;
-  public static final int       VERY_POOR    = 4;
-  public static final int       SPECULATIVE  = 5;
-  public static final int       QUESTIONABLE = 6;
-  public static final int       NUMBER       = 7;
+public class PbnSuffix {
+    public static final int NONE = 0;
+    public static final int GOOD = 1;
+    public static final int POOR = 2;
+    public static final int VERY_GOOD = 3;
+    public static final int VERY_POOR = 4;
+    public static final int SPECULATIVE = 5;
+    public static final int QUESTIONABLE = 6;
+    public static final int NUMBER = 7;
 
-  private int                   mSuffix;
+    private int mSuffix;
 
-  public                        PbnSuffix()
-  {
-    mSuffix = NONE;
-  }
+    public PbnSuffix() {
+        mSuffix = NONE;
+    }
 
-  public                        PbnSuffix(
-  int                           iSuffix )
-  {
-    mSuffix = iSuffix;
-  }
+    public PbnSuffix(
+            int iSuffix) {
+        mSuffix = iSuffix;
+    }
 
-  public                        PbnSuffix(
-  PbnSuffix oSuffix )
-  {
-    mSuffix = oSuffix.mSuffix;
-  }
+    public PbnSuffix(
+            PbnSuffix oSuffix) {
+        mSuffix = oSuffix.mSuffix;
+    }
 
-  public int                    Get()
-  {
-    return mSuffix;
-  }
+    public static boolean IsValid(
+            int iSuffix) {
+        return ((GOOD <= iSuffix) && (iSuffix <= QUESTIONABLE));
+    }
 
-  public void                   Set(
-  PbnSuffix oSuffix )
-  {
-    mSuffix = oSuffix.mSuffix;
-  }
+    public int Get() {
+        return mSuffix;
+    }
 
-  public boolean                IsValid()
-  {
-    return IsValid( mSuffix );
-  }
+    public void Set(
+            PbnSuffix oSuffix) {
+        mSuffix = oSuffix.mSuffix;
+    }
 
-  public static boolean         IsValid(
-  int                           iSuffix )
-  {
-    return(  (GOOD <= iSuffix) && (iSuffix <= QUESTIONABLE) );
-  }
+    public boolean IsValid() {
+        return IsValid(mSuffix);
+    }
 
-  public PbnNag                 Convert(
-  boolean                       bAuction )
-  {
-    int                         iNag;
+    public PbnNag Convert(
+            boolean bAuction) {
+        int iNag;
 
-    iNag = ( bAuction ) ? PbnNag.AUCTION_GOOD : PbnNag.PLAY_GOOD;
+        iNag = (bAuction) ? PbnNag.AUCTION_GOOD : PbnNag.PLAY_GOOD;
 
-    return new PbnNag( iNag + mSuffix - GOOD );
-  }
+        return new PbnNag(iNag + mSuffix - GOOD);
+    }
 }
