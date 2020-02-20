@@ -1,0 +1,47 @@
+
+
+apply plugin: 'java'
+apply plugin: 'maven-publish'
+// apply plugin: 'cobertura'
+
+group = 'nl.tistis'
+version = '2.9.2-RELEASE'
+description = 'pbnj'
+sourceCompatibility = '1.8'
+
+buildscript {
+    repositories {
+        mavenLocal()
+        mavenCentral()
+    }
+    dependencies {
+        classpath 'net.saliman:gradle-cobertura-plugin:2.2.4'			
+    }
+}
+
+repositories {
+    mavenLocal()
+    mavenCentral()
+}
+
+dependencies {
+    testImplementation 'org.junit.jupiter:junit-jupiter-api:5.4.2'
+    testImplementation 'org.junit.jupiter:junit-jupiter-engine:5.4.2'
+}
+
+
+
+publishing {
+    publications {
+        maven(MavenPublication) {
+            from(components.java)
+        }
+    }
+}
+
+tasks.withType(JavaCompile) {
+    options.encoding = 'UTF-8'
+}
+test {
+    useJUnitPlatform()
+}
