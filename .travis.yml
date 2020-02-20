@@ -9,7 +9,7 @@ jdk:
 before_install:
   - "export DISPLAY=:99.0"
 
-script: xvfb-run -a test jacocoTestReport
+script: xvfb-run -a ./gradlew test jacocoTestReport
 
 # This is to enable CodeCov's coverage
 # If a build is successful, the code is submitted for coverage analysis
