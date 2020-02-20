@@ -9,10 +9,9 @@ jdk:
 before_install:
   - "export DISPLAY=:99.0"
 
-script: xvfb-run test jacocoTestReport
+script: xvfb-run -a test jacocoTestReport
 
 # This is to enable CodeCov's coverage
 # If a build is successful, the code is submitted for coverage analysis
 after_success:
   - bash <(curl -s https://codecov.io/bash)
-  
