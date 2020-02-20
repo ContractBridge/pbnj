@@ -1,9 +1,9 @@
 # We will use Ubuntu 18.04 (bionic beaver). List of options:
 # https://docs.travis-ci.com/user/reference/overview/#linux
 dist: xenial
+language: java
 services:
   - xvfb
-language: java
 jdk:
   - openjdk8
 before_install:
