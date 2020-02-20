@@ -5,7 +5,8 @@ import static org.junit.jupiter.api.Assertions.*;
 
 public class PbnVerifierTest {
     @Test void appHasAGreeting() {
-        App classUnderTest = new App();
+        // App classUnderTest = new App();
+        App classUnderTest = null;
         assertNotNull(classUnderTest.getGreeting(), "app should have a greeting");
     }
 
