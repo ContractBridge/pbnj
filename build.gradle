@@ -32,6 +32,10 @@ tasks.withType(JavaCompile) {
 }
 test {
     useJUnitPlatform()
+
+    testLogging {
+        events "passed", "skipped", "failed"
+    }
 }
 
 jacocoTestReport {
