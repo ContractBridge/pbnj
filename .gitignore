@@ -27,5 +27,6 @@ target/
 *.iml
 **/.gradle
 **/build
+**/out
 **/.DS_Store
 

@@ -1,0 +1,58 @@
+% PBN 2.0
+% EXPORT
+%
+% These deals have been played at OKbridge
+%          http://www.okbridge.com
+%
+[Event "##OKbridge Tournament"]
+[Site "##?"]
+[Date "##?"]
+[Board "92"]
+[West "Shawn"]
+[North "papi"]
+[East "daffydoc"]
+[South "snabu"]
+[Dealer "W"]
+[Vulnerable "NS"]
+[Deal "W:A94.K2.T876.QT53 Q75.AQJT976.9.42 KT62.3.AK2.AK986 J83.854.QJ543.J7"]
+[Scoring "##IMP"]
+[Declarer "W"]
+[Contract "3NT"]
+[Result "10"]
+[Mode "##OKB"]
+[Round "##IMP__1"]
+[Score "NS -430"]
+[ScoreIMP "NS -1.41"]
+[Auction "W"]
+1NT 3H X Pass
+3NT Pass Pass Pass
+[Play "N"]
+HQ H3 H8 -
+*
+[ScoreTable "Rank\3R;Contract\5L;Declarer\1;Result\2R;Score_NS\5R;IMP_NS\6R;Multiplicity"]
+  1 6C    W  9   150   9.91 1
+  2 5CX   E 10   100   9.46 1
+  3 5C    E 10    50   8.47 4
+  7 5C    W 10    50   8.47 7
+ 14 6C    W 11    50   8.47 5
+ 19 3C    E 10  -130   5.25 1
+ 20 4C    W 11  -150   4.90 1
+ 21 2S    E 10  -170   4.35 1
+ 22 2HX   N  7  -200   3.86 1
+ 23 3H    N  7  -200   3.86 1
+ 24 3HX   N  8  -200   3.86 1
+ 25 4H    N  8  -200   3.86 1
+ 26 4HX   N  9  -200   3.86 2
+ 28 4H    N  7  -300   1.71 1
+ 29 3NT   W  9  -400  -0.63 2
+ 31 5C    E 11  -400  -0.63 1
+ 32 5C    W 11  -400  -0.63 8
+ 40 4S    W 10  -420  -1.40 10
+ 50 5C    W 12  -420  -1.40 1
+ 51 3NT   W 10  -430  -1.41 24
+ 75 4S    W 11  -450  -2.22 4
+ 79 3NT   W 11  -460  -2.34 7
+ 86 3NT   W 12  -490  -3.17 8
+ 94 3HX   N  7  -500  -3.23 9
+103 4HX   N  8  -500  -3.23 4
+107 4HX   N  7  -800  -9.13 5

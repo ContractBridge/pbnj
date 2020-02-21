@@ -1,0 +1,30 @@
+% PBN 1.0
+%
+% These deals have been played at OKbridge
+%          http://www.okbridge.com
+%
+[Event "OKbridge Tournament"]
+[Site "?"]
+[Date "?"]
+[Board "92"]
+[West "Shawn"]
+[North "papi"]
+[East "daffydoc"]
+[South "snabu"]
+[Dealer "W"]
+[Vulnerable "NS"]
+[Deal "W:A94.K2.T876.QT53 Q75.AQJT976.9.42 KT62.3.AK2.AK986 J83.854.QJ543.J7"]
+[Scoring "IMP"]
+[Declarer "W"]
+[Contract "3NT"]
+[Result "10"]
+[Mode "OKB"]
+[Round "IMP__1"]
+[Score "NS -430"]
+[ScoreIMP "NS -1.41"]
+[Auction "W"]
+1NT 3H X Pass
+3NT Pass Pass Pass
+[Play "N"]
+HQ H3 H8 -
+*
