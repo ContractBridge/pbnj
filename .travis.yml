@@ -1,13 +1,15 @@
 # We will use Ubuntu 18.04 (bionic beaver). List of options:
 # https://docs.travis-ci.com/user/reference/overview/#linux
 dist: xenial
-
 language: java
-
+services:
+  - xvfb
 jdk:
   - openjdk8
+before_install:
+  - "export DISPLAY=:99.0"
 
-script: "./gradlew jacocoTestReport"
+script: xvfb-run -a ./gradlew test jacocoTestReport
 
 # This is to enable CodeCov's coverage
 # If a build is successful, the code is submitted for coverage analysis
