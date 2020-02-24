@@ -1,0 +1,74 @@
+% PBN 2.0
+% EXPORT
+%
+% These deals have been played at OKbridge
+%          http://www.okbridge.com
+%
+[Event "##OKbridge Tournament"]
+[Site "##?"]
+[Date "##?"]
+[Board "300"]
+[West "leerjet"]
+[North "papi"]
+[East "drewsky"]
+[South "snabu"]
+[Dealer "W"]
+[Vulnerable "NS"]
+[Deal "W:J87.865.J95.AJ92 62.AKQ2.KQ73.874 AT5.JT94.AT64.KQ KQ943.73.82.T653"]
+[Declarer "E"]
+[Contract "1NT"]
+[Result "9"]
+[Score "NS -150"]
+[ScoreIMP "NS -2.17"]
+[Auction "W"]
+Pass 1D 1NT Pass
+Pass Pass
+[Play "S"]
+S3 S7 S6 S5
+D2 D9 DQ DA
+D8 DJ DK D4
+H3 H5 HA HT
+H7 H6 HK HJ
+S4 H8 HQ H4
+S9 S8 S2 SA
+SQ SJ H2 H9
+C3 C2 C4 CK
+C5 CA C7 CQ
+C6 CJ C8 ST
+SK D5 D3 D6
+CT C9 D7 DT
+[ScoreTable "Rank\3R;Contract\5L;Declarer\1;Result\2R;Score_NS\5R;IMP_NS\6R;Multiplicity"]
+  1 2HX   N  8   670  12.53 1
+  2 2C    W  5   150   5.27 1
+  3 3C    W  6   150   5.27 1
+  4 2S    N  8   110   4.22 1
+  5 2S    S  8   110   4.22 8
+ 13 2C    W  6   100   4.19 4
+ 17 3C    W  7   100   4.19 1
+ 18 1NT   N  7    90   3.90 1
+ 19 1H    N  7    80   3.84 1
+ 20 1S    S  7    80   3.84 1
+ 21 1D    N  7    70   3.73 1
+ 22 2C    W  7    50   2.91 7
+ 29 2H    W  7    50   2.91 1
+ 30 2NT   E  7    50   2.91 1
+ 31 3NT   E  8    50   2.91 1
+ 32 1NT   E  7   -90  -0.65 4
+ 36 1NT   W  7   -90  -0.65 1
+ 37 2C    W  8   -90  -0.65 4
+ 41 1D    N  6  -100  -0.66 1
+ 42 1H    N  6  -100  -0.66 1
+ 43 1NT   N  6  -100  -0.66 15
+ 58 2C    S  7  -100  -0.66 1
+ 59 2S    S  7  -100  -0.66 8
+ 67 1NT   E  8  -120  -1.60 4
+ 71 1NT   W  8  -120  -1.60 2
+ 73 2NT   E  8  -120  -1.60 2
+ 75 1NT   E  9  -150  -2.17 8
+ 83 1NT   N  5  -200  -3.43 10
+ 93 2H    N  6  -200  -3.43 2
+ 95 2S    S  6  -200  -3.43 4
+ 99 2NT   S  6  -200  -3.43 1
+100 3D    N  7  -200  -3.43 1
+101 1NT   N  4  -300  -5.71 1
+102 2NT   N  5  -300  -5.71 1

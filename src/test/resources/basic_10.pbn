@@ -1,0 +1,38 @@
+% PBN 1.0
+%
+% These deals have been played at OKbridge
+%          http://www.okbridge.com
+%
+[Event "OKbridge Tournament"]
+[Site "?"]
+[Date "?"]
+[Board "300"]
+[West "leerjet"]
+[North "papi"]
+[East "drewsky"]
+[South "snabu"]
+[Dealer "W"]
+[Vulnerable "NS"]
+[Deal "W:J87.865.J95.AJ92 62.AKQ2.KQ73.874 AT5.JT94.AT64.KQ KQ943.73.82.T653"]
+[Declarer "E"]
+[Contract "1NT"]
+[Result "9"]
+[Score "NS -150"]
+[ScoreIMP "NS -2.17"]
+[Auction "W"]
+Pass 1D 1NT Pass
+Pass Pass
+[Play "S"]
+S3 S7 S6 S5
+D2 D9 DQ DA
+D8 DJ DK D4
+H3 H5 HA HT
+H7 H6 HK HJ
+S4 H8 HQ H4
+S9 S8 S2 SA
+SQ SJ H2 H9
+C3 C2 C4 CK
+C5 CA C7 CQ
+C6 CJ C8 ST
+SK D5 D3 D6
+CT C9 D7 DT
