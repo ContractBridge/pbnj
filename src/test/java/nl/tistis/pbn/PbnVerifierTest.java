@@ -2,7 +2,6 @@ package nl.tistis.pbn;
 
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
-import org.mockito.Mockito;
 
 import java.io.PrintStream;
 import java.nio.file.Paths;
@@ -11,7 +10,7 @@ import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.mockito.Mockito.*;
 
 @DisplayName("PbnVerifier is the main method for the application")
-public class PbnVerifierTest {
+class PbnVerifierTest {
     @DisplayName("It has a test that needs to be deleted \uD83D\uDE31")
     @Test void appHasAGreeting() {
         App classUnderTest = new App();
