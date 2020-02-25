@@ -74,9 +74,4 @@ class PbnVerifierTest {
 
         verify(outMock).println(expected);
     }
-
-    @DisplayName("drive 10")
-    @Test void  drive10() {
-
-    }
 }
