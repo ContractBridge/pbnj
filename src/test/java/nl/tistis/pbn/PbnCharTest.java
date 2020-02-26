@@ -2,8 +2,7 @@ package nl.tistis.pbn;
 
 import org.junit.jupiter.api.Test;
 
-import static org.junit.jupiter.api.Assertions.assertFalse;
-import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.junit.jupiter.api.Assertions.*;
 
 public class PbnCharTest {
 
@@ -125,6 +124,23 @@ public class PbnCharTest {
                 assertFalse(PbnChar.InTagName((char) i));
             }
         }
+    }
+
+    @Test
+    void skipSpaceGivenAStringWithNoLeadingSpacesReturnsTheSameString() {
+        assertEquals("abc", PbnChar.SkipSpace("abc"));
+        assertEquals("a b c   ", PbnChar.SkipSpace("a b c   "));
+    }
+
+    @Test
+    void skipSpaceRemovesLeadingSpaces() {
+        assertEquals("a b c ", PbnChar.SkipSpace(" a b c "));
+        assertEquals("a b c ", PbnChar.SkipSpace("      a b c "));
+    }
+
+    @Test
+    void skipSpaceGivenAStringOfOnlySpacesReturnsASingleSpace() {
+        assertEquals("", PbnChar.SkipSpace("     "));
     }
 
 
