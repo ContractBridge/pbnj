@@ -9,6 +9,7 @@ public class PbnCharTest {
 
     private static final int UNICODE_0_NULL_CHARACTER = 0;
     private static final int UNICODE_32_SPACE = 32;
+    private static final int UNICODE_33_EXCLAMATION_MARK = 33;
     private static final int UNICODE_45_HYPHEN = 45;
     private static final int UNICODE_48_DIGIT_0 = 48;
     private static final int UNICODE_57_DIGIT_9 = 57;
@@ -99,6 +100,19 @@ public class PbnCharTest {
         }
     }
 
+    @Test
+    void inSectionReturnsABooleanCheckingSomeThingsThatAreNotClearFromTheMethodName() {
+
+        for (int i = UNICODE_0_NULL_CHARACTER; i <= UNICODE_255_SMALL_Y_WITH_DIAERESIS; i++) {
+
+            if ((i >= UNICODE_33_EXCLAMATION_MARK && i <= UNICODE_126_TILDE) && !isOneOfTheseChars(i) ) {
+                assertTrue(PbnChar.InSection((char) i));
+            } else {
+                assertFalse(PbnChar.InSection((char) i));
+            }
+        }
+    }
+
 
     private boolean isADigit(int i) {
         return i >= UNICODE_48_DIGIT_0 && i <= UNICODE_57_DIGIT_9;
@@ -114,5 +128,15 @@ public class PbnCharTest {
 
     private boolean isAHyphen(int i) {
         return i == UNICODE_45_HYPHEN;
+    }
+
+    private boolean isOneOfTheseChars(int i) {
+        char[] myChars = {'[', ']', '{', '}', ';', '%', '"'};
+        for (char character : myChars) {
+            if (character == (char) i) {
+                return true;
+            }
+        }
+        return false;
     }
 }
