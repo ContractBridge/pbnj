@@ -23,7 +23,7 @@ public class PbnCharTest {
     private static final int UNICODE_255_SMALL_Y_WITH_DIAERESIS = 255;
 
     @Test
-    void isPbnCharReturnsBooleanCheckingIfCharacterIsInCorrectRange() {
+    void isPbnCharReturnsBooleanCheckingIfCharacterIsAValidPortableBridgeNotationStandardCharacter() {
 
         for (int i = UNICODE_0_NULL_CHARACTER; i <= UNICODE_255_SMALL_Y_WITH_DIAERESIS; i++) {
 
@@ -49,7 +49,7 @@ public class PbnCharTest {
     }
 
     @Test
-    void isDateCharReturnsBooleanCheckingIfCharacterIsAQuestionMarkOrADigit() {
+    void isDateCharReturnsBooleanCheckingIfCharacterIsADigitOrQuestionMark() {
 
         for (int i = UNICODE_0_NULL_CHARACTER; i <= UNICODE_255_SMALL_Y_WITH_DIAERESIS; i++) {
 
@@ -105,7 +105,7 @@ public class PbnCharTest {
 
         for (int i = UNICODE_0_NULL_CHARACTER; i <= UNICODE_255_SMALL_Y_WITH_DIAERESIS; i++) {
 
-            if ((i >= UNICODE_33_EXCLAMATION_MARK && i <= UNICODE_126_TILDE) && !isOneOfTheseChars(i) ) {
+            if ((i >= UNICODE_33_EXCLAMATION_MARK && i <= UNICODE_126_TILDE) && !isOneOfTheseChars(i)) {
                 assertTrue(PbnChar.InSection((char) i));
             } else {
                 assertFalse(PbnChar.InSection((char) i));
@@ -147,7 +147,6 @@ public class PbnCharTest {
     private boolean isAnUnderscore(int i) {
         return i == UNICODE_95_UNDERSCORE;
     }
-
 
     private boolean isADigit(int i) {
         return i >= UNICODE_48_DIGIT_0 && i <= UNICODE_57_DIGIT_9;
