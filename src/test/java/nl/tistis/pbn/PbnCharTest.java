@@ -16,6 +16,7 @@ public class PbnCharTest {
     private static final int UNICODE_63_QUESTION_MARK = 63;
     private static final int UNICODE_65_CAPITAL_A = 65;
     private static final int UNICODE_90_CAPITAL_Z = 90;
+    private static final int UNICODE_95_UNDERSCORE = 95;
     private static final int UNICODE_97_SMALL_A = 97;
     private static final int UNICODE_122_SMALL_Z = 122;
     private static final int UNICODE_126_TILDE = 126;
@@ -111,6 +112,24 @@ public class PbnCharTest {
                 assertFalse(PbnChar.InSection((char) i));
             }
         }
+    }
+
+    @Test
+    void inTagNameReturnsABooleanCheckingIfCharacterIsEitherLetterDigitOrUnderscore() {
+
+        for (int i = UNICODE_0_NULL_CHARACTER; i <= UNICODE_255_SMALL_Y_WITH_DIAERESIS; i++) {
+
+            if (isACapitalLetter(i) || isALowercaseLetter(i) || isADigit(i) || isAnUnderscore(i)) {
+                assertTrue(PbnChar.InTagName((char) i));
+            } else {
+                assertFalse(PbnChar.InTagName((char) i));
+            }
+        }
+    }
+
+
+    private boolean isAnUnderscore(int i) {
+        return i == UNICODE_95_UNDERSCORE;
     }
 
 
