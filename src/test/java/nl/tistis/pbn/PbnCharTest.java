@@ -139,7 +139,7 @@ public class PbnCharTest {
     }
 
     @Test
-    void skipSpaceGivenAStringOfOnlySpacesReturnsASingleSpace() {
+    void skipSpaceGivenAStringOfOnlySpacesReturnsAnEmptyString() {
         assertEquals("", PbnChar.SkipSpace("     "));
     }
 
