@@ -4,7 +4,7 @@ import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.*;
 
-public class PbnCharTest {
+class PbnCharTest {
 
     private static final int UNICODE_0_NULL_CHARACTER = 0;
     private static final int UNICODE_32_SPACE = 32;
@@ -146,7 +146,7 @@ public class PbnCharTest {
 
     @Test
     void filterBackslashGivenANullStringReturnsNull() {
-        assertEquals(null, PbnChar.FilterBackslash(null));
+        assertNull(PbnChar.FilterBackslash(null));
     }
 
     @Test
@@ -160,25 +160,8 @@ public class PbnCharTest {
     }
 
     @Test
-    void filterBackslashGivenAStringWithNonConsecutiveDoubleQuotesReturnsTheSameString() {
-        assertEquals("\"a\"b\"c\"", PbnChar.FilterBackslash("\"a\"b\"c\""));
-    }
-
-    @Test
-    void filterBackslashReducesPairsOfBackslashesToSingleBackslashes() {
-        assertEquals("\\a\\b\\\\c\\\\d\\\\\\e\\\\\\f",
-                PbnChar.FilterBackslash("\\a\\\\b\\\\\\c\\\\\\\\d\\\\\\\\\\e\\\\\\\\\\\\f"));
-    }
-
-    @Test
-    void filterBackslashReducesPairingsOfABackslashAndADoubleQuoteToJustTheDoubleQuote() {
-        assertEquals("\"", PbnChar.FilterBackslash("\\\""));
-        assertEquals("\\\"", PbnChar.FilterBackslash("\\\\\""));
-    }
-
-    @Test
     void filterBackslashRemovesAnyBackslashThatIsImmediatelyBeforeAnotherBackslashOrADoubleQuote() {
-        assertEquals("\"_\\_\\_\"", PbnChar.FilterBackslash("\\\"_\\\\_\\_\""));
+        assertEquals("\"_\\_\"_\\", PbnChar.FilterBackslash("\\\"_\\\\_\"_\\"));
     }
 
 
