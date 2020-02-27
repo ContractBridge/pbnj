@@ -144,6 +144,44 @@ public class PbnCharTest {
     }
 
 
+    @Test
+    void filterBackslashGivenANullStringReturnsNull() {
+        assertEquals(null, PbnChar.FilterBackslash(null));
+    }
+
+    @Test
+    void filterBackslashGivenAStringWithNoBackslashesReturnsSameString() {
+        assertEquals("abc123\"[]!@#$%^&*()", PbnChar.FilterBackslash("abc123\"[]!@#$%^&*()"));
+    }
+
+    @Test
+    void filterBackslashGivenAStringWithNonConsecutiveBackslashesReturnsTheSameString() {
+        assertEquals("\\a\\b\\c\\", PbnChar.FilterBackslash("\\a\\b\\c\\"));
+    }
+
+    @Test
+    void filterBackslashGivenAStringWithNonConsecutiveDoubleQuotesReturnsTheSameString() {
+        assertEquals("\"a\"b\"c\"", PbnChar.FilterBackslash("\"a\"b\"c\""));
+    }
+
+    @Test
+    void filterBackslashReducesPairsOfBackslashesToSingleBackslashes() {
+        assertEquals("\\a\\b\\\\c\\\\d\\\\\\e\\\\\\f",
+                PbnChar.FilterBackslash("\\a\\\\b\\\\\\c\\\\\\\\d\\\\\\\\\\e\\\\\\\\\\\\f"));
+    }
+
+    @Test
+    void filterBackslashReducesPairingsOfABackslashAndADoubleQuoteToJustTheDoubleQuote() {
+        assertEquals("\"", PbnChar.FilterBackslash("\\\""));
+        assertEquals("\\\"", PbnChar.FilterBackslash("\\\\\""));
+    }
+
+    @Test
+    void filterBackslashRemovesAnyBackslashThatIsImmediatelyBeforeAnotherBackslashOrADoubleQuote() {
+        assertEquals("\"_\\_\\_\"", PbnChar.FilterBackslash("\\\"_\\\\_\\_\""));
+    }
+
+
     private boolean isAnUnderscore(int i) {
         return i == UNICODE_95_UNDERSCORE;
     }
