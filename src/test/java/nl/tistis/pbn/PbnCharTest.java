@@ -143,7 +143,6 @@ class PbnCharTest {
         assertEquals("", PbnChar.SkipSpace("     "));
     }
 
-
     @Test
     void filterBackslashGivenANullStringReturnsNull() {
         assertNull(PbnChar.FilterBackslash(null));
