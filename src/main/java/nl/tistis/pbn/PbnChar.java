@@ -19,21 +19,19 @@ public class PbnChar {
   public static final char VERTAB = '\u000B';
   public static final char RETURN = '\r'; // '\r'
   public static final char SPACE = '\u0020';
-  public static final char DOUBLEQUOTE = '\u0022'; // '"'
   public static final char ESCAPE = '\u0025'; // '%'
-  public static final char BACKSLASH = '\\';
   public static final String StringEol = "\r\n";
 
   public static boolean IsPbnChar(char c) {
-    return (((0 <= c) && (c <= 126)) || ((160 <= c) && (c <= 255)));
+    return c <= 126 || 160 <= c && c <= 255;
   }
 
-  public static boolean IsDigit(char cDigit) {
-    return (('0' <= cDigit) && (cDigit <= '9'));
+  public static boolean IsDigit(char c) {
+    return (('0' <= c) && (c <= '9'));
   }
 
-  public static boolean IsDateChar(char cDate) {
-    return ((cDate == '?') || IsDigit(cDate));
+  public static boolean IsDateChar(char c) {
+    return ((c == '?') || IsDigit(c));
   }
 
   public static boolean IsLetter(char c) {
@@ -49,84 +47,26 @@ public class PbnChar {
   }
 
   public static boolean InSection(char c) {
-    boolean bOk = false;
+    char[] prohibitedChars = {'[', ']', '{', '}', ';', '%', '"'};
 
-    if ((33 <= c) && (c <= 126)) {
-      switch (c) {
-        case '[':
-        case ']':
-        case '{':
-        case '}':
-        case ';':
-        case '%':
-        case '"':
-          break;
-        default:
-          bOk = true;
-          break;
-      }
-    }
-
-    return bOk;
+    return (33 <= c) && (c <= 126) &&
+      !(new String(prohibitedChars).contains(Character.toString(c)));
   }
 
   public static boolean InTagName(char c) {
+
     return (IsLetter(c) || IsDigit(c) || (c == '_'));
   }
 
-  public static String SkipSpace(String oString) {
-    int length = oString.length();
-    int i;
+  public static String SkipSpace(String s) {
 
-    for (i = 0; i < length; i++) {
-      if (!IsSpace(oString.charAt(i))) {
-        break;
-      }
-    }
-
-    if (i == length) {
-      return "";
-    }
-
-    return oString.substring(i);
+    return s.replaceAll("^\\s+", "");
   }
 
-  public static String FilterBackslash(String oString) {
-    if (oString == null) {
-      return null;
-    }
+  public static String FilterBackslash(String s) {
 
-    int length = oString.length();
-    char c;
-    boolean bBackslash = false;
-    StringBuffer lSb = new StringBuffer();
-
-    for (int i = 0; i < length; i++) {
-      c = oString.charAt(i);
-      if (bBackslash) {
-        switch (c) {
-          case BACKSLASH:
-          case DOUBLEQUOTE:
-            break;
-          default:
-            lSb.append(BACKSLASH);
-            break;
-        }
-        lSb.append(c);
-        bBackslash = false;
-      } else {
-        if (c == BACKSLASH) {
-          bBackslash = true;
-        } else {
-          lSb.append(c);
-        }
-      }
-    }
-
-    if (bBackslash) {
-      lSb.append(BACKSLASH);
-    }
-
-    return lSb.toString();
+    return s == null ?
+            null :
+            s.replace("\\\\", "\\").replace("\\\"", "\"");
   }
 }
