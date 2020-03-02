@@ -263,4 +263,82 @@ class PbnVerifierTest {
                 Arguments.of("W: No new line", 0)
         );
     }
+
+    @DisplayName("A pbn 2.1 file containing errors reports those errors to the log file")
+    @ParameterizedTest
+    @MethodSource("getPbn21ErrorMessagesAndCounts")
+    void verifyPbn21ErrorsReportedInLogFile(String errorMessage, long expectedErrorCount) throws IOException {
+        String logFilePath = testFileRootPath + "test.log";
+        String inputFilePath = Paths.get(testFileRootPath + "errors_21.pbn").toAbsolutePath().toString();
+        String[] args = new String[]{"-O" + testFileRootPath + "test.log", inputFilePath};
+
+        new PbnVerifier(args, true);
+        List<String> lines = Files.readAllLines(Paths.get(logFilePath), StandardCharsets.ISO_8859_1);
+
+        long numberOfErrors = lines.stream()
+                .filter(line -> line.equals(errorMessage))
+                .count();
+        assertEquals(expectedErrorCount, numberOfErrors);
+    }
+
+    private static Stream<Arguments> getPbn21ErrorMessagesAndCounts() {
+        return Stream.of(
+                Arguments.of("I: No error", 0),
+                Arguments.of("E: General error", 0),
+                Arguments.of("S: Bad call", 0),
+                Arguments.of("S: Bad card", 0),
+                Arguments.of("E: Bad character", 0),
+                Arguments.of("S: Bad comment", 0),
+                Arguments.of("S: Bad contract", 0),
+                Arguments.of("S: Bad deal", 0),
+                Arguments.of("S: Bad declarer", 0),
+                Arguments.of("S: Bad illegal", 0),
+                Arguments.of("S: Bad inheritance", 0),
+                Arguments.of("S: Bad lead", 0),
+                Arguments.of("E: Bad nag", 0),
+                Arguments.of("E: Bad note", 0),
+                Arguments.of("E: Bad number", 0),
+                Arguments.of("S: Bad rank", 0),
+                Arguments.of("E: Bad result", 0),
+                Arguments.of("S: Bad revoke", 0),
+                Arguments.of("S: Bad risk", 0),
+                Arguments.of("E: Bad score", 0),
+                Arguments.of("E: Bad section", 0),
+                Arguments.of("S: Bad side", 0),
+                Arguments.of("E: Bad suffix", 0),
+                Arguments.of("S: Bad suit", 0),
+                Arguments.of("E: Bad tag value", 0),
+                Arguments.of("S: Bad trump", 0),
+                Arguments.of("S: Double illegal", 0),
+                Arguments.of("W: Double nag", 0),
+                Arguments.of("E: Double note", 0),
+                Arguments.of("E: Double suffix", 0),
+                Arguments.of("F: File error", 0),
+                Arguments.of("S: Line too long", 0),
+                Arguments.of("W: New tag name", 2),
+                Arguments.of("R: New tag value", 0),
+                Arguments.of("S: No contract", 0),
+                Arguments.of("S: No deal", 0),
+                Arguments.of("S: No dealer", 0),
+                Arguments.of("S: No declarer", 0),
+                Arguments.of("E: No note for =%d=", 0),
+                Arguments.of("I: No tag", 0),
+                Arguments.of("E: No tag value", 0),
+                Arguments.of("F: No resources", 0),
+                Arguments.of("S: Revoke", 0),
+                Arguments.of("S: Wrong character", 0),
+                Arguments.of("S: Wrong tag value", 0),
+                Arguments.of("S: Sufficient", 0),
+                Arguments.of("W: Tag exists already", 0),
+                Arguments.of("W: Unknown lead", 0),
+                Arguments.of("W: Unused note [%d]", 0),
+                Arguments.of("E: Bad last call", 0),
+                Arguments.of("E: Bad last card", 0),
+                Arguments.of("E: Bad table", 0),
+                Arguments.of("E: Bad table order", 0),
+                Arguments.of("E: Bad vulnerable", 0),
+                Arguments.of("W: Bad play", 0),
+                Arguments.of("W: No new line", 0)
+        );
+    }
 }
