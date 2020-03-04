@@ -53,3 +53,5 @@ Clean:
 ```shell script
 $> ./gradlew clean
 ```
+
+For information about the command line instructions, see the [README-ORIGINAL.md](README-ORIGINAL.md).
