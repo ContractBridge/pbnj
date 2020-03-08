@@ -4,7 +4,7 @@
 # pbnj
 
 This repository is a version of [Tis Veugen](http://www.tistis.nl/index.html)'s [PbnJVeri](https://github.com/ContractBridge/PbnJVeri) 
-a Java program for verifying whether PBN files obey the standards PBN 1.0, PBN 2.0,
+a Java program for verifying whether PBN (Portable Bridge Notation) files obey the standards PBN 1.0, PBN 2.0,
 and PBN 2.1. The program is also able to convert PBN files from import format
 to export format. The PBN standard and PBN files can be found on the PBN homepages:
 
